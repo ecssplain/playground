@@ -1,0 +1,40 @@
+body {
+    font-family: "Fira Sans", sans-serif;
+    margin: 0;
+    padding: 1em 2em;
+}
+
+.breakdown {
+    background-color: hsl(207, 61%, 68%);
+    border-radius: 0.25em;
+    font-size: 1.2em;
+    padding: 0.75em;
+}
+.breakdown label {
+    margin-right: 1em;
+}
+.breakdown input {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    border-radius: 0.25em;
+    color: #fff;
+    font-family: "Fira Sans", sans-serif;
+    font-size: 1em;
+    margin-right: 0.5em;
+    text-align: center;
+    width: 4em;
+}
+.breakdown input.empty {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.box-model {
+    border: 1px solid #666;
+    display: inline-block;
+    margin-top: 2em;
+}
+.box-model span {
+    outline: 1px dashed #999;
+}

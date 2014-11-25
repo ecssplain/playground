@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf8">
+    <title>eCCSplain prototype</title>
+    <link rel="stylesheet" href="proto.css">
+</head>
+<body>
+    <section id="shorthand">
+        <h1>How padding shorthand works</h1>
+        <form action="">
+            <div class="breakdown">
+                <label for="padding-top">padding:</label>
+                <input type="text" id="padding-top"    class="ECLinkedValue" data-var="top" />
+                <input type="text" id="padding-right"  class="ECLinkedValue" data-var="right top"  data-previous="top" />
+                <input type="text" id="padding-bottom" class="ECLinkedValue" data-var="bottom top" data-previous="right" />
+                <input type="text" id="padding-left"   class="ECLinkedValue" data-var="left right top" data-previous="bottom" />
+            </div>
+        </form>
+        <div class="box-model"><span>Content</span></div>
+    </section>
+
+    <script src="Tangle.js"></script>
+    <script src="proto.js"></script>
+</body>
+</html>
