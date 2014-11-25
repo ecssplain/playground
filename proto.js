@@ -8,6 +8,10 @@
                 console.log('elem.oninput()', value, elem);
                 box.setValue(prop, value);
             };
+            var link = box.root.querySelector('.link[data-prop=' + prop + ']');
+            if (link) {
+                box.links[prop] = link;
+            }
         });
     }
 
@@ -29,6 +33,7 @@
         };
         this.propList = ['top', 'right', 'bottom', 'left']; // Maintain exact order
         this.inputs = {};
+        this.links = {};
         initInputs(this);
         this.update();
     }
@@ -64,6 +69,9 @@
             // Show derived value if empty (e.g. if `left` is empty, get value from `right`)
             if (isEmpty) {
                 elem.setAttribute('placeholder', this.getDerivedValue(prop));
+            }
+            if (this.links[prop]) {
+                this.links[prop].classList[isEmpty ? 'add' : 'remove']('visible');
             }
         });
         var style = [this.values.top, this.values.right, this.values.bottom, this.values.left].join(' ');

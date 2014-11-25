@@ -7,14 +7,17 @@ body {
 .breakdown {
     background-color: hsl(207, 61%, 70%);
     border-radius: 0.25em;
+    display: table;
     font-size: 1.25em;
     padding: 2em 0.75em;
+    border-spacing: 0.5em;
 }
 .breakdown .property {
-    margin-right: 1em;
+    display: table-cell;
+    padding-right: 1em;
 }
 .breakdown .property-input {
-    margin-right: 0.5em;
+    display: table-cell;
     position: relative;
 }
 .property-input label {
@@ -43,6 +46,27 @@ body {
 }
 .breakdown input::-webkit-input-placeholder {
     color: rgba(255, 255, 255, 0.6);
+}
+.breakdown .link {
+    border-radius: 50%;
+    border: 1px dashed #914B19;
+    bottom: -1.05em;
+    box-sizing: border-box;
+    clip: rect(1em, auto, auto, auto);
+    display: none;
+    height: 2em;
+    position: absolute;
+    right: 2em;
+    width: 4.5em;
+}
+.breakdown .link-wide {
+    bottom: -1.55em;
+    clip: rect(1.5em, auto, auto, auto);
+    height: 3em;
+    width: 9em;
+}
+.breakdown .link.visible {
+    display: block;
 }
 
 .box-model {
