@@ -10,17 +10,28 @@
         <h1>How padding shorthand works</h1>
         <form action="">
             <div class="breakdown">
-                <label for="padding-top">padding:</label>
-                <input type="text" id="padding-top"    data-prop="top" />
-                <input type="text" id="padding-right"  data-prop="right" />
-                <input type="text" id="padding-bottom" data-prop="bottom" />
-                <input type="text" id="padding-left"   data-prop="left" />
+                <span class="property">padding:</span>
+                <span class="property-input prop-top">
+                    <label for="padding-top">top</label>
+                    <input type="text" id="padding-top"    data-prop="top" />
+                </span>
+                <span class="property-input prop-right">
+                    <label for="padding-right">right</label>
+                    <input type="text" id="padding-right"  data-prop="right" />
+                </span>
+                <span class="property-input prop-bottom">
+                    <label for="padding-bottom">bottom</label>
+                    <input type="text" id="padding-bottom" data-prop="bottom" />
+                </span>
+                <span class="property-input prop-left">
+                    <label for="padding-left">left</label>
+                    <input type="text" id="padding-left"   data-prop="left" />
+                </span>
             </div>
         </form>
         <div class="box-model"><span>Content</span></div>
     </section>
 
-    <script src="Tangle.js"></script>
     <script src="proto.js"></script>
 </body>
 </html>

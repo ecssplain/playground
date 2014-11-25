@@ -5,34 +5,50 @@ body {
 }
 
 .breakdown {
-    background-color: hsl(207, 61%, 68%);
+    background-color: hsl(207, 61%, 70%);
     border-radius: 0.25em;
-    font-size: 1.2em;
-    padding: 0.75em;
+    font-size: 1.25em;
+    padding: 2em 0.75em;
 }
-.breakdown label {
+.breakdown .property {
     margin-right: 1em;
+}
+.breakdown .property-input {
+    margin-right: 0.5em;
+    position: relative;
+}
+.property-input label {
+    display: inline-block;
+    font-size: 0.7em;
+    position: absolute;
+    text-align: center;
+    top: -1.75em;
+    width: 95%;
 }
 .breakdown input {
     background-color: rgba(0, 0, 0, 0.5);
     border: 1px solid rgba(0, 0, 0, 0.6);
     border-radius: 0.25em;
+    box-sizing: border-box;
     color: #fff;
     font-family: "Fira Sans", sans-serif;
     font-size: 1em;
-    margin-right: 0.5em;
     text-align: center;
     width: 4em;
 }
 .breakdown input.empty {
-    background-color: rgba(0, 0, 0, 0.1);
-    border-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.2);
+    border-color: rgba(0, 0, 0, 0.3);
     color: rgba(255, 255, 255, 0.5);
+}
+.breakdown input::-webkit-input-placeholder {
+    color: rgba(255, 255, 255, 0.6);
 }
 
 .box-model {
     border: 1px solid #666;
     display: inline-block;
+    font-size: 1.25em;
     margin-top: 2em;
 }
 .box-model span {
