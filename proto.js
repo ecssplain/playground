@@ -1,6 +1,7 @@
 (function () {
 
-    function initInputs(box) {
+    function initElems(box) {
+        box.exampleRoot = box.root.querySelector('.box-model');
         box.propList.forEach(function (prop) {
             var elem = box.inputs[prop] = box.root.querySelector('input[data-prop=' + prop + ']');
             elem.oninput = function () {
@@ -12,13 +13,13 @@
             if (link) {
                 box.links[prop] = link;
             }
+            box.exampleGuides[prop] = box.exampleRoot.querySelector('.guide[data-prop=' + prop + ']');
         });
     }
 
 
     function BoxModel(root, property) {
         this.root = root;
-        this.example = root.querySelector('.box-model');
         this.property = property;
         this.values = {
             top: '1em',
@@ -32,9 +33,14 @@
             left: 'right'
         };
         this.propList = ['top', 'right', 'bottom', 'left']; // Maintain exact order
+
+        // Elements
         this.inputs = {};
         this.links = {};
-        initInputs(this);
+        this.exampleRoot = null;
+        this.exampleGuides = {};
+        initElems(this);
+
         this.update();
     }
 
@@ -74,11 +80,18 @@
                 this.links[prop].classList[isEmpty ? 'add' : 'remove']('visible');
             }
         });
+
+        // Update visual example
         var style = [this.values.top, this.values.right, this.values.bottom, this.values.left].join(' ');
         if (!style.trim().length) {
             style = '0';
         }
-        this.example.style[this.property] = style;
+        this.exampleRoot.style[this.property] = style;
+        var computed = getComputedStyle(this.exampleRoot);
+        this.each(function (prop) {
+            var dimension = (prop === 'top' || prop === 'bottom') ? 'height' : 'width';
+            this.exampleGuides[prop].style[dimension] = computed[this.property + '-' + prop];
+        });
     };
 
     BoxModel.prototype.enforceValidInput = function () {

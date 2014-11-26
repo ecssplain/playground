@@ -74,7 +74,26 @@ body {
     display: inline-block;
     font-size: 1.25em;
     margin-top: 2em;
+    
+    position: relative;
 }
-.box-model span {
+.box-model .content {
     outline: 1px dashed #999;
+}
+.box-model .guide {
+    background: rgba(255, 0, 0, 0.2);
+    display: block;
+    position: absolute;
+}
+.box-model .guide:not([data-prop=bottom]) {
+    top: 0;
+}
+.box-model .guide:not([data-prop=left]) {
+    right: 0;
+}
+.box-model .guide:not([data-prop=top]) {
+    bottom: 0;
+}
+.box-model .guide:not([data-prop=right]) {
+    left: 0;
 }
