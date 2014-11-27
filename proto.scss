@@ -1,0 +1,133 @@
+$dim-colour-top: #090;
+$dim-colour-right: #900;
+$dim-colour-bottom: #009;
+$dim-colour-left: #960;
+
+$dim-colours: (top: $dim-colour-top,
+               right: $dim-colour-right,
+               bottom: $dim-colour-bottom,
+               left: $dim-colour-left);
+
+
+body {
+    font-family: "Fira Sans", sans-serif;
+    margin: 0;
+    padding: 1em 2em;
+}
+
+.breakdown {
+    background-color: hsl(207, 61%, 70%);
+    border-radius: 0.25em;
+    display: table;
+    font-size: 1.25em;
+    padding: 2em 0.75em;
+    border-spacing: 0.5em;
+
+    .property {
+        display: table-cell;
+        padding-right: 1em;
+    }
+    .property-input {
+        display: table-cell;
+        position: relative;
+    }
+    .property-input label {
+        display: inline-block;
+        font-size: 0.7em;
+        position: absolute;
+        text-align: center;
+        top: -1.75em;
+        width: 95%;
+    }
+    input {
+        background-color: rgba(0, 0, 0, 0.5);
+        border: 1px solid rgba(0, 0, 0, 0.6);
+        border-radius: 0.25em;
+        box-sizing: border-box;
+        color: #fff;
+        font-family: "Fira Sans", sans-serif;
+        font-size: 1em;
+        text-align: center;
+        width: 4em;
+
+        &.empty {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-color: rgba(0, 0, 0, 0.3);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        &::-webkit-input-placeholder {
+            color: #333;
+            opacity: 0.6;
+            font-style: italic;
+        }
+        &::-moz-placeholder {
+            color: rgba(255, 0, 0, 0.6);
+        }
+
+        @each $prop, $col in $dim-colours {
+            &[data-prop=#{$prop}] {
+                background-color: fade-out($col, 0.4);
+                border-color: fade-out($col, 0.1);
+
+                &.empty {
+                    background-color: fade-out($col, 0.9);
+                    border-color: fade-out($col, 0.7);
+                }
+            }
+        }
+    }
+    .link {
+        border-radius: 50%;
+        border: 1px dashed #666;
+        bottom: -1.05em;
+        box-sizing: border-box;
+        clip: rect(1em, auto, auto, auto);
+        display: none;
+        height: 2em;
+        position: absolute;
+        right: 2em;
+        width: 4.5em;
+
+        &.visible {
+            display: block;
+        }
+
+        &-wide {
+            bottom: -1.55em;
+            clip: rect(1.5em, auto, auto, auto);
+            height: 3em;
+            width: 9em;
+        }
+
+        @each $prop, $col in $dim-colours {
+            &[data-prop=#{$prop}] { border-color: $col; }
+        }
+    }
+}
+
+.box-model {
+    border: 1px solid #666;
+    display: inline-block;
+    font-size: 1.25em;
+    margin-top: 2em;
+    position: relative;
+
+    .content {
+        display: inline-block;
+        outline: 1px dashed #999;
+        width: 11em;
+    }
+    .guide {
+        display: block;
+        position: absolute;
+
+        @each $prop, $col in $dim-colours {
+            &[data-prop=#{$prop}] { background-color: fade-out($col, 0.6); }
+        }
+    }
+    .guide:not([data-prop=bottom]) { top: 0; }
+    .guide:not([data-prop=left])   { right: 0; }
+    .guide:not([data-prop=top])    { bottom: 0; }
+    .guide:not([data-prop=right])  { left: 0; }
+}
