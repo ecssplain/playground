@@ -14,9 +14,13 @@ body {
     margin: 0;
     padding: 1em 2em;
 }
+input {
+    font-family: inherit;
+    font-size: 1em;
+}
 
 .breakdown {
-    background-color: hsl(207, 61%, 70%);
+    background-color: hsl(207, 71%, 88%);
     border-radius: 0.25em;
     display: table;
     font-size: 1.25em;
@@ -45,8 +49,6 @@ body {
         border-radius: 0.25em;
         box-sizing: border-box;
         color: #fff;
-        font-family: "Fira Sans", sans-serif;
-        font-size: 1em;
         text-align: center;
         width: 4em;
 
@@ -67,12 +69,13 @@ body {
 
         @each $prop, $col in $dim-colours {
             &[data-prop=#{$prop}] {
-                background-color: fade-out($col, 0.4);
-                border-color: fade-out($col, 0.1);
+                background-color: fade-out($col, 0.3);
+                border-color: $col;
 
                 &.empty {
                     background-color: fade-out($col, 0.9);
-                    border-color: fade-out($col, 0.7);
+                    border-color: fade-out($col, 0.5);
+                    border-style: dashed;
                 }
             }
         }
@@ -103,6 +106,20 @@ body {
         @each $prop, $col in $dim-colours {
             &[data-prop=#{$prop}] { border-color: $col; }
         }
+    }
+}
+
+.raw-value {
+    font-size: 1.25em;
+    font-family: "Fira Mono", monospace;
+    padding: 1em 0 0 1em;
+
+    label {
+        color: #c00;
+    }
+    input {
+        border: none;
+        border-bottom: 1px solid #699;
     }
 }
 

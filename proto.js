@@ -4,17 +4,24 @@
         box.exampleRoot = box.root.querySelector('.box-model');
         box.propList.forEach(function (prop) {
             var elem = box.inputs[prop] = box.root.querySelector('input[data-prop=' + prop + ']');
-            elem.oninput = function () {
+            elem.addEventListener('input', function () {
                 var value = elem.value;
                 console.log('elem.oninput()', value, elem);
                 box.setValue(prop, value);
-            };
+            }, false);
             var link = box.root.querySelector('.link[data-prop=' + prop + ']');
             if (link) {
                 box.links[prop] = link;
             }
             box.exampleGuides[prop] = box.exampleRoot.querySelector('.guide[data-prop=' + prop + ']');
         });
+
+        box.rawValue = box.root.querySelector('.raw-value input');
+        box.rawValue.addEventListener('input', function () {
+            var value = this.value;
+            console.log('rawValue.oninput()', value);
+            box.setRawValue(value);
+        }, false);
     }
 
 
@@ -37,6 +44,7 @@
         // Elements
         this.inputs = {};
         this.links = {};
+        this.rawValue = null;
         this.exampleRoot = null;
         this.exampleGuides = {};
         initElems(this);
@@ -49,8 +57,8 @@
     };
 
     BoxModel.prototype.each = function (callback) {
-        this.propList.forEach(function (prop) {
-            callback.call(this, prop, this.values[prop], this.inputs[prop]);
+        this.propList.forEach(function (prop, i) {
+            callback.call(this, prop, this.values[prop], this.inputs[prop], i);
         }, this);
     };
 
@@ -59,6 +67,22 @@
         console.log('BoxModel.setValue(%s):', prop, value);
         if (oldValue !== value) {
             this.values[prop] = value;
+            this.update();
+        }
+    };
+
+    BoxModel.prototype.setRawValue = function (value) {
+        console.log('BoxModel.setRawValue():', value);
+        var parts = value.trim().split(/\s+/);
+        var isDirty = false;
+        this.each(function (prop, oldValue, elem, i) {
+            var newValue = parts[i] || '';
+            if (newValue !== oldValue) {
+                this.values[prop] = newValue;
+                isDirty = true;
+            }
+        });
+        if (isDirty) {
             this.update();
         }
     };
@@ -81,11 +105,16 @@
             }
         });
 
-        // Update visual example
-        var style = [this.values.top, this.values.right, this.values.bottom, this.values.left].join(' ');
-        if (!style.trim().length) {
+        // Update raw value
+        var style = [this.values.top, this.values.right, this.values.bottom, this.values.left].join(' ').trim();
+        if (!style.length) {
             style = '0';
         }
+        if (style !== this.rawValue.value) {
+            this.rawValue.value = style;
+        }
+
+        // Update visual example
         this.exampleRoot.style[this.property] = style;
         var computed = getComputedStyle(this.exampleRoot);
         this.each(function (prop) {
