@@ -154,4 +154,12 @@
 
     window.paddingBox = new BoxModel(document.getElementById('shorthand'), 'padding');
 
+
+    /*** Animated values ***/
+
+    var wraparound = document.querySelector('.wraparound');
+    wraparound.querySelector('.toggle').addEventListener('click', function () {
+        wraparound.classList.toggle('expanded');
+    });
+
 })();

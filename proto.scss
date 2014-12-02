@@ -148,3 +148,57 @@ input {
     .guide:not([data-prop=top])    { bottom: 0; }
     .guide:not([data-prop=right])  { left: 0; }
 }
+
+.wraparound {
+    left: 40em;
+    position: absolute;
+    top: 3em;
+
+    .content {
+        border: 3px solid;
+        border-color: $dim-colour-top $dim-colour-right $dim-colour-bottom $dim-colour-left;
+        box-sizing: border-box;
+        display: block;
+        height: 5em;
+        line-height: 5;
+        margin: 1.5em 0 0 4.5em;
+        text-align: center;
+        width: 5em;
+    }
+    .toggle {
+        font-size: 1em;
+        font-family: inherit;
+        margin: 4em 0 0 4.5em;
+    }
+    .prop {
+        display: block;
+        float: left;
+        width: 4.5em;
+    }
+    .values {
+        display: block;
+        margin-left: 4.5em;
+        position: relative;
+    }
+    .value {
+        display: block;
+        position: absolute;
+        transition: transform 1s;
+
+        @each $prop, $col in $dim-colours {
+            &[data-prop=#{$prop}] {
+                color: $col;
+            }
+        }
+        &[data-prop-list] {
+            transform: translate(2em, 0);
+        }
+    }
+
+    &.expanded .value {
+        &[data-prop=top]      { transform: translate(1.5em, 0); }
+        &[data-prop-list=rbl] { transform: translate(6.5em, 3.25em) rotate(90deg); }
+        &[data-prop-list=bl]  { transform: translate(5em, 3.25em) rotate(90deg); }
+        &[data-prop-list=l]   { transform: translate(5em, 3.25em) rotate(90deg); }
+    }
+}
